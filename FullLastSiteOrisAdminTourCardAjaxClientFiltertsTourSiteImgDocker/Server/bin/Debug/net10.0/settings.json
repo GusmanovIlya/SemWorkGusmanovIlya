@@ -1,0 +1,8 @@
+{
+  "StaticDirectoryPath": "public/",
+  "Domain": "0.0.0.0",
+  "Port": "1234",
+  "ConnectionStrings": {
+    "Postgres": "Host=db;Port=5432;Username=postgres;Password=postgres;Database=tours_db"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "Domain": "*",
+  "ConnectionStrings": {
+    "Postgres": "Host=db;Port=5432;Username=postgres;Password=postgres;Database=tours_db"
+  }
+}

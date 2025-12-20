@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>You Travel Me — Авторские туры</title>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<style>
+body {margin:0;background:#eaeaea;font-family:'Segoe UI',Arial,sans-serif;color:#333;}
+.nav {display:flex;justify-content:center;align-items:center;gap:70px;height:80px;background:white;box-shadow:0 4px 20px rgba(0,0,0,0.08);margin-bottom:30px;}
+.nav1,.nav2,.nav3{display:flex;align-items:center;gap:15px;}
+.nav2main{display:flex;gap:30px;}
+.login{position:relative;padding:10px 20px;cursor:pointer;}
+.login::before{content:"";position:absolute;inset:0;top:6px;border:1px solid #adadad;border-radius:5px;pointer-events:none;}
+.breadcrumbs{margin:16px 0 0 290px;color:#888;font-size:14px;}
+.banner{width:1130px;margin:20px auto;}
+.banner img{width:100%;border-radius:16px;box-shadow:0 8px 25px rgba(0,0,0,0.12);}
+.small-blocks{display:flex;gap:16px;margin:0 0 30px 270px;overflow-x:auto;padding-bottom:8px;}
+.small-blocks img{width:215px;border-radius:12px;box-shadow:0 4px 15px rgba(0,0,0,0.1);flex-shrink:0;}
+.top-panel{margin-top:65px;max-width:1130px;margin-left:570px;padding:0 20px;display:flex;gap:20px;align-items:center;font-weight:600;font-size:18px;margin-bottom:20px;font-size:15px;}
+.content-wrapper{max-width:1130px;margin:0 auto;padding:0 20px 120px;display:flex;gap:30px;}
+.filters-sidebar{width:240px;flex-shrink:0;background:white;border-radius:14px;padding:22px;box-shadow:0 4px 16px rgba(0,0,0,0.07);position:sticky;top:20px;align-self:flex-start;}
+.filters-sidebar h3{margin:0 0 18px;font-size:18px;font-weight:700;}
+.filter-group{margin-bottom:16px;}
+.filter-group label{display:block;margin-bottom:6px;font-weight:600;font-size:14px;}
+.filter-group input,.filter-group select{width:100%;padding:10px;border:1px solid #ddd;border-radius:8px;font-size:14px;box-sizing:border-box;}
+.filter-group input[type="number"]::-webkit-inner-spin-button,
+.filter-group input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+.filter-group input[type="number"]
+.filter-group .checkbox-label {display:flex;align-items:center;cursor:pointer;font-weight:normal;}
+.filter-group .checkbox-label input {width:auto;margin-right:8px;}
+.filter-group input:focus,.filter-group select:focus {border-color:#007bff;outline:none;box-shadow:0 0 0 3px rgba(0,123,255,0.1);}
+.filter-group select {
+    background-size: 12px;
+    appearance: none;
+}
+.cards-container{flex:1;}
+.card{display:flex;background:white;border-radius:16px;overflow:hidden;box-shadow:0 6px 25px rgba(0,0,0,0.1);height:240px;margin-bottom:24px;cursor:pointer;transition:transform .2s;}
+.card:hover{transform:translateY(-4px);}
+.card img{width:290px;height:240px;object-fit:cover;flex-shrink:0;}
+.card-content{flex:1;padding:20px 26px;display:flex;gap:32px;justify-content:space-between;}
+.maininfo{flex:1;max-width:520px;display:flex;flex-direction:column;gap:8px;}
+.maininfo .rating{font-size:14.5px;color:#555;font-weight:600;}
+.maininfo .rating::before{content:"★";color:#ffb400;font-size:17px;margin-right:5px;position:relative;top:1px;}
+.maininfo .title{font-size:20.5px;font-weight:700;line-height:1.32;color:#1a1a1a;margin:0;}
+.maininfo .desc{font-size:14.8px;line-height:1.58;color:#555;margin:6px 0 12px;flex-grow:1;}
+.maininfo .features{font-size:14.5px;color:#27ae60;font-weight:600;}
+.priceinfo{display:flex;flex-direction:column;justify-content:space-between;min-width:180px;text-align:right;padding-top:2px;gap:4px;}
+.priceinfo .old{color:#999;text-decoration:line-through;font-size:14.5px;}
+.priceinfo .new{font-size:26px;font-weight:800;color:#000;}
+.priceinfo .dates{color:#666;font-size:14.5px;margin-top:2px;}
+.buttonmore{margin-top:auto;background:#f8f9fa;color:#333;padding:11px 30px;border:1px solid #e0e0e0;border-radius:12px;font-size:15.5px;font-weight:600;cursor:pointer;transition:background .2s,border-color .2s;}
+.buttonmore:hover{background:#e9ecef;border-color:#ccc;}
+</style>
+</head>
+<body>
+<div class="nav">
+<div class="nav1">
+<div class="logo"><a href="/"><img src="images/logo.jpg" alt="You Travel Me" width="105" height="44"></a></div>
+<div>Путешествия</div>
+<div>Компаниям</div>
+<div>Организаторам туров</div>
+<div>Помощь</div>
+</div>
+<div class="nav2main">
+<div class="nav2">
+<div>Подберите мне тур</div>
+<div>Как это работает</div>
+</div>
+<div class="nav3">
+<div class="planet"><a href="/"><img src="images/planet.jpg" width="50"></a></div>
+<div style="font-size:14px;">RUB</div>
+<div class="login">Войти</div>
+</div>
+</div>
+</div>
+<div class="breadcrumbs">Главная • Все туры • Типы туров • Экскурсионные туры</div>
+<div class="banner">
+<img src="images/mainimg.jpg" alt="Лучшие туры">
+</div>
+<div class="small-blocks">
+<img src="images/block1.jpg" alt="">
+<img src="images/block2.jpg" alt="">
+<img src="images/block3.jpg" alt="">
+<img src="images/block4.jpg" alt="">
+<img src="images/block5.jpg" alt="">
+</div>
+<div class="top-panel">
+<div>Найдено <strong id="total-tours">{{TOTAL_TOURS}}</strong> туров</div>
+<div>
+        Сортировать:
+<select id="sort-select">
+<option value="popularity">По популярности</option>
+<option value="price_asc">Сначала дешевые</option>
+<option value="price_desc">Сначала дорогие</option>
+<option value="rating_desc">По рейтингу</option>
+<option value="duration_asc">По длительности</option>
+</select>
+</div>
+</div>
+<div class="content-wrapper">
+<aside class="filters-sidebar">
+<h3>Фильтры</h3>
+<div class="filter-group"><label>Страна / Город</label><input type="text" id="filter-country" placeholder="Турция, Сейшелы..."></div>
+<div class="filter-group"><label>Цена от</label><input type="number" id="filter-price-min" placeholder="50 000"></div>
+<div class="filter-group"><label>Цена до</label><input type="number" id="filter-price-max" placeholder="500 000"></div>
+<div class="filter-group"><label>Длительность</label>
+<select id="filter-duration">
+<option value="">Любая</option>
+<option value="7-10">7–10 дней</option>
+<option value="11-14">11–14 дней</option>
+<option value="15+">15+ дней</option>
+</select>
+</div>
+<div class="filter-group"><label>Комфорт</label>
+<select id="filter-comfort">
+<option value="">Любой</option>
+<option value="1">1 ●○○○○</option>
+<option value="2">2 ●●○○○</option>
+<option value="3">3 ●●●○○</option>
+<option value="4">4 ●●●●○</option>
+<option value="5">5 ●●●●●</option>
+</select>
+</div>
+<div class="filter-group"><label>Активность</label>
+<select id="filter-activity">
+<option value="">Любая</option>
+<option value="1">1 ●○○○○</option>
+<option value="2">2 ●●○○○</option>
+<option value="3">3 ●●●○○</option>
+<option value="4">4 ●●●●○</option>
+<option value="5">5 ●●●●●</option>
+</select>
+</div>
+<div class="filter-group">
+<label class="checkbox-label"><input type="checkbox" id="filter-discount"> Только со скидкой</label>
+</div>
+</aside>
+<div class="cards-container" id="cards-container">
+        {{CARDS}}
+</div>
+</div>
+
+<script>
+$(document).ready(function() {
+    function loadTours() {
+        var params = {
+            country: $('#filter-country').val().trim(),
+            price_min: $('#filter-price-min').val() || '',
+            price_max: $('#filter-price-max').val() || '',
+            duration: $('#filter-duration').val() || '',
+            comfort: $('#filter-comfort').val() || '',
+            activity: $('#filter-activity').val() || '',
+            discount: $('#filter-discount').is(':checked') ? '1' : '0',
+            sort: $('#sort-select').val() || 'popularity'
+        };
+
+        Object.keys(params).forEach(key => {
+            if (params[key] === '' || (key === 'discount' && params[key] === '0')) {
+                delete params[key];
+            }
+        });
+
+        $.get('/api/tours', params, function(data) {
+            $('#cards-container').html(data.cards);
+            $('#total-tours').text(data.total);
+        }).fail(function() {
+            $('#cards-container').html('<div style="text-align:center;padding:100px;color:#888;font-size:18px;">Ошибка загрузки туров</div>');
+        });
+    }
+
+    let debounceTimer;
+    function debouncedLoad() {
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(loadTours, 300);
+    }
+
+    $('#filter-country, #filter-price-min, #filter-price-max').on('input', debouncedLoad);
+    $('#filter-duration, #filter-comfort, #filter-activity, #filter-discount, #sort-select').on('change', loadTours);
+
+    loadTours();
+});
+</script>
+</body>
+</html>
