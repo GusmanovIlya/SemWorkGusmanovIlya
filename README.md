@@ -1,21 +1,39 @@
-Dockerfile
+Семестровая работа #1 Гусманов Илья
+Сайт с турами YouTravel.me
 
-открыть проект и в терминале ввести команды
+Необходимое ПО: .NET 8.0, Postgress 16
+Для Docker: Docker, Docker Compose
 
-dotnet --list-sdks
-dotnet --list-runtimes
+Запуск через Docker:
+1. Из корневой папки проекта:
+```bash
+docker compose up --build
+```
+2. Поднимутся две задачи: tours_db, tours_app
+3. Сервера находится на адресах:
+   Главная страница - http://localhost:1234
+   Админ-панель - http://localhost:1234/admin (данные для авторизации: admin/12345)
 
-база данных находится внутри проекта в папке db
-
-сервер заработает на localhost:1234
-localhost:1234/admin
-
-admin/12345
-
-Не через dockerfile
-
-войти в папку server
-cd server
-
+Запуск вручную:
+1. Создать базу данных
+```bash
+createdb tours_db
+```
+Затем вставка данных
+```bash
+psql -U postgres -d tours_db -f db/init.sql
+```
+2. Параметры подключения находятся в Server/settings.json
+3. Конечный запуск
+```bash
+cd Server
+```
+```bash
 dotnet build
+```
+```bash
 dotnet run
+```
+4. Сервера находится на адресах:
+   Главная страница - http://localhost:1234
+   Админ-панель - http://localhost:1234/admin (данные для авторизации: admin/12345)
